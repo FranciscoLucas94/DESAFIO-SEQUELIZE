@@ -13,6 +13,16 @@ class OrderController {
   async getAll(req, res) {
     res.json(await service.getOrders());
   }
+
+  async update(req, res) {
+    const { id } = req.params;
+    res.json(await service.updateOrder(id, req.body));
+  }
+  
+  async delete(req, res) {
+    const { id } = req.params;
+    res.json(await service.deleteOrder(id));
+  }
 }
 
 export { OrderController };
