@@ -1,13 +1,28 @@
-import * as service from '../services/productService.js';
+import * as service from '../services/orderService.js';
 
-class ProductController {
+class OrderController {
   async create(req, res) {
-    res.status(201).json(await service.createProduct(req.body));
+    try {
+      const data = await service.createOrder(req.body);
+      res.status(201).json(data);
+    } catch (e) {
+      res.status(400).json({ erro: e.message });
+    }
   }
 
   async getAll(req, res) {
-    res.json(await service.getProducts());
+    res.json(await service.getOrders());
+  }
+
+  async update(req, res) {
+    const { id } = req.params;
+    res.json(await service.updateOrder(id, req.body));
+  }
+  
+  async delete(req, res) {
+    const { id } = req.params;
+    res.json(await service.deleteOrder(id));
   }
 }
 
-export { ProductController };
+export { OrderController };
