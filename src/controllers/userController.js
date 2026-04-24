@@ -13,6 +13,15 @@ class UserController {
   async getAll(req, res) {
     res.json(await service.getUsers());
   }
+  async update(req, res) {
+    const { id } = req.params;
+    res.json(await service.updateUser(id, req.body));
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+    res.json(await service.deleteUser(id));
+  }
 }
 
 export { UserController };
